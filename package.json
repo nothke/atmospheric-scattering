@@ -1,0 +1,10 @@
+{
+  "name": "nothke.atmosphericscattering",
+  "displayName": "Atmospheric Scattering",
+  "version": "1.0.0",
+  "unity": "2019.3",
+  "description": "Atmospheric Scattering solution initially developed by Michal Skalsky - SlightlyMad. Improved by  NeatWolf. Converted to package by Nothke.",
+  "dependencies": {
+  },
+  "type": "library"
+}

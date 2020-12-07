@@ -1,0 +1,17 @@
+{
+    "name": "Nothke.AtmosphericScattering.Editor",
+    "references": [
+        "GUID:4597b12dcf5cfee49b668c6088b40566"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
