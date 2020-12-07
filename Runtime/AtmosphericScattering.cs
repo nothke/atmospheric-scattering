@@ -67,6 +67,10 @@ public class AtmosphericScattering : MonoBehaviour
     public ComputeShader ScatteringComputeShader;
     public Light Sun;
 
+    [Header("Camera Position")]
+    public bool updatePositionFromCamera = true;
+    public Vector3 cameraPositionOffset;
+
     [Header("Scattering")]
     public bool RenderAtmosphericFog = true;
     [Range(1, 64)]
@@ -379,6 +383,14 @@ public class AtmosphericScattering : MonoBehaviour
     }
 #endif
 
+    Vector3 GetCameraPosition()
+    {
+        if (updatePositionFromCamera)
+            return _camera.transform.position + cameraPositionOffset;
+        else
+            return cameraPositionOffset;
+    }
+
     private void InitializeReflectionProbe()
     {
         if (_reflectionProbe != null)
@@ -558,7 +570,7 @@ public class AtmosphericScattering : MonoBehaviour
         ScatteringComputeShader.SetVector("_TopRightCorner", _FrustumCorners[2]);
         ScatteringComputeShader.SetVector("_BottomRightCorner", _FrustumCorners[3]);
 
-        ScatteringComputeShader.SetVector("_CameraPos", transform.position);
+        ScatteringComputeShader.SetVector("_CameraPos", GetCameraPosition());
         ScatteringComputeShader.SetVector("_LightDir", Sun.transform.forward);
         ScatteringComputeShader.SetFloat("_DistanceScale", DistanceScale);
 
@@ -788,7 +800,7 @@ public class AtmosphericScattering : MonoBehaviour
     {
         if (RenderSettings.skybox != null)
         {
-            RenderSettings.skybox.SetVector("_CameraPos", _camera.transform.position);
+            RenderSettings.skybox.SetVector("_CameraPos", GetCameraPosition());
             UpdateMaterialParameters(RenderSettings.skybox);
             if (RenderingMode == RenderMode.Reference)
                 RenderSettings.skybox.EnableKeyword("ATMOSPHERE_REFERENCE");
@@ -839,7 +851,7 @@ public class AtmosphericScattering : MonoBehaviour
         _material.SetVector("_FrustumCorners3", _FrustumCorners[3]);
 #endif
 
-        _material.SetVector("_CameraPos", _camera.transform.position);
+        _material.SetVector("_CameraPos", GetCameraPosition());
         _material.SetFloat("_SunIntensity", SunIntensity);
 
         _material.SetTexture("_InscatteringLUT", _inscatteringLUT);
