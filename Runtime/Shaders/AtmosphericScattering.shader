@@ -234,6 +234,9 @@ Shader "Hidden/AtmosphericScattering"
 			uniform float _FogDensity = 0.005;
 			uniform float _FogHeight = 1000;
 
+			float _FogReferenceHeightOffset;
+			float _FogColorMultiplier;
+
 			struct VSInput
 			{
 				float4 vertex : POSITION;
@@ -287,6 +290,8 @@ Shader "Hidden/AtmosphericScattering"
 
 				float3 wpos = i.wpos;
 				float3 rayStart = _WorldSpaceCameraPos;
+				rayStart.y += _FogReferenceHeightOffset;
+
 				float3 rayDir = wpos - _WorldSpaceCameraPos;
 				rayDir *= linearDepth;
 
@@ -392,7 +397,7 @@ Shader "Hidden/AtmosphericScattering"
 
 				// Colorize blend
 				//skyboxScatter *= float4(0.8, 0.8, 0, 1);
-				skyboxScatter *= 0.4;
+				skyboxScatter *= _FogColorMultiplier;
 
 				// END SKYBOX
 
