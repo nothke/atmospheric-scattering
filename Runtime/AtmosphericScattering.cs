@@ -673,8 +673,9 @@ public class AtmosphericScattering : MonoBehaviour
         _randomVectorsLUT = new Texture2D(256, 1, TextureFormat.RGBAHalf, false, true);
         _randomVectorsLUT.name = "RandomVectorsLUT";
         Color[] colors = new Color[256];
-        //UnityEngine.Random.seed = 1234567890;
-        UnityEngine.Random.InitState(1234567890);
+
+        //UnityEngine.Random.InitState(1234567890);
+
         for (int i = 0; i < colors.Length; ++i)
         {
             Vector3 vector = UnityEngine.Random.onUnitSphere;
