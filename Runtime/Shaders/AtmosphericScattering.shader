@@ -150,7 +150,7 @@ Shader "Hidden/AtmosphericScattering"
 				return o;
 			}
 
-			float4 fragDir(v2f i) : SV_Target
+			float4 fragDir(v2p i) : SV_Target
 			{
 				float cosAngle = i.uv.x * 1.1 - 0.1;// *2.0 - 1.0;
                 float sinAngle = sqrt(saturate(1 - cosAngle * cosAngle));
@@ -196,7 +196,7 @@ Shader "Hidden/AtmosphericScattering"
 				return o;
 			}
 
-			float4 fragDir(v2f i) : SV_Target
+			float4 fragDir(v2p i) : SV_Target
 			{
 				float cosAngle = i.uv.x * 1.1 - 0.1;// *2.0 - 1.0;
 				
@@ -282,7 +282,7 @@ Shader "Hidden/AtmosphericScattering"
 				return g;
 			}
 
-			float4 fragDir(v2f i) : COLOR0
+			float4 fragDir(PSInput i) : COLOR0
 			{
 				float2 uv = i.uv.xy;
 				float depth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv);
